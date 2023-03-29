@@ -41,9 +41,7 @@ my_data_rows = my_cur.fetchall()
 fruit_list = [row[0] for row in my_data_rows]
 
 # Display the multiselect widget
-add_my_fruit = streamlit.multiselect("What fruit would you like to add?", fruit_list)
+add_my_fruit = streamlit.text_input("What fruit would you like to add?")
 
 # Display a message thanking the user for adding the selected fruits
-if add_my_fruit:
-    selected_fruits = ", ".join(add_my_fruit)
-    streamlit.text("Thanks for adding " + selected_fruits + "!")
+my_cur.execute("insert into fruit_load_list values('from streamlit')")
