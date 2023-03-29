@@ -38,5 +38,6 @@ my_cur.execute("SELECT * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
 
 #add_my_fruit = my_data_rows.set_index('Fruit')
-add_my_fruit = streamlit.multiselect("What fruit would you like to add?", list(my_data_rows))
+fruit_list = [row[1] for row in my_data_rows]
+add_my_fruit = streamlit.multiselect("What fruit would you like to add?", fruit_list)
 streamlit.text("Thanks for adding " + add_my_fruit)
