@@ -40,8 +40,9 @@ my_data_rows = my_cur.fetchall()
 # Extract the fruit names from the tuples and put them in a list
 fruit_list = [row[0] for row in my_data_rows]
 
-# Display the multiselect widget
+# Display the text input
 add_my_fruit = streamlit.text_input("What fruit would you like to add?")
+streamlit.write("Thanks for adding " + add_my_fruit)
 
 # Display a message thanking the user for adding the selected fruits
 my_cur.execute("insert into fruit_load_list values('from streamlit')")
