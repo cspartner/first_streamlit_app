@@ -61,7 +61,7 @@ def insert_row_snowflake(new_fruit):
 # Extract the fruit names from the tuples and put them in a list
 fruit_list = [row[0] for row in my_data_rows]
 
-# Display the text input
+# Display the text input here
 add_my_fruit = streamlit.text_input("What fruit would you like to add?")
 if streamlit.button('Add a fruit to the list'):
   resp = insert_row_snowflake(add_my_fruit)
