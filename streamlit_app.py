@@ -34,19 +34,23 @@ try:
     streamlit.error("Please select a fruit to get information.")
   else:
     streamlit.write('The user entered ', fruit_choice)
-
     back_from_function = get_fruityvice_data(fruit_choice)
     # write your own comment - what does this do?
     streamlit.dataframe(back_from_function)
 except URLError as e:
   streamlit.error()
+
+def get_fruit_load_list():
+  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+  my_cur = my_cnx.cursor()
+  my_cur.execute("SELECT * from fruit_load_list")
+  return my_cur.fetchall()
+
+if streamlit.button('Get Fruit Load List'):
+  my_data_rows = get_fruit_load_list()
+  streamlit.dataframe(my_data_rows)
   
 streamlit.stop()
-
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT * from fruit_load_list")
-my_data_rows = my_cur.fetchall()
 
 # Extract the fruit names from the tuples and put them in a list
 fruit_list = [row[0] for row in my_data_rows]
