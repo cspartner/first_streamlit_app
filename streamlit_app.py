@@ -63,6 +63,6 @@ fruit_list = [row[0] for row in my_data_rows]
 
 # Display the text input
 add_my_fruit = streamlit.text_input("What fruit would you like to add?")
-if streamlit.button('Add a fruit to the list')
+if streamlit.button('Add a fruit to the list'):
   resp = insert_row_snowflake(add_my_fruit)
   streamlit.text(resp)
