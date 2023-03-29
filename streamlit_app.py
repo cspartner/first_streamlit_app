@@ -51,7 +51,7 @@ if streamlit.button('Get Fruit Load List'):
   my_data_rows = get_fruit_load_list()
   streamlit.dataframe(my_data_rows)
   
-streamlit.stop()
+#streamlit.stop()
 
 def insert_row_snowflake(new_fruit):
    with my_cnx.cursor as my_cur:
@@ -59,7 +59,7 @@ def insert_row_snowflake(new_fruit):
    return "Thanks for adding " + new_fruit
 
 # Extract the fruit names from the tuples and put them in a list
-fruit_list = [row[0] for row in my_data_rows]
+#fruit_list = [row[0] for row in my_data_rows]
 
 # Display the text input here
 add_my_fruit = streamlit.text_input("What fruit would you like to add?")
