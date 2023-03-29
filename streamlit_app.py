@@ -44,5 +44,6 @@ fruit_list = [row[0] for row in my_data_rows]
 add_my_fruit = streamlit.multiselect("What fruit would you like to add?", fruit_list)
 
 # Display a message thanking the user for adding the selected fruits
-selected_fruits = ", ".join(add_my_fruit)
-streamlit.text("Thanks for adding " + selected_fruits + "!")
+if add_my_fruit:
+    selected_fruits = ", ".join(add_my_fruit)
+    streamlit.text("Thanks for adding " + selected_fruits + "!")
