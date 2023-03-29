@@ -37,7 +37,12 @@ my_cur = my_cnx.cursor()
 my_cur.execute("SELECT * from fruit_load_list")
 my_data_rows = my_cur.fetchall()
 
-#add_my_fruit = my_data_rows.set_index('Fruit')
+# Extract the fruit names from the tuples and put them in a list
 fruit_list = [row[1] for row in my_data_rows]
+
+# Display the multiselect widget
 add_my_fruit = streamlit.multiselect("What fruit would you like to add?", fruit_list)
-streamlit.text("Thanks for adding " + add_my_fruit)
+
+# Display a message thanking the user for adding the selected fruits
+selected_fruits = ", ".join(add_my_fruit)
+streamlit.text("Thanks for adding " + selected_fruits + "!")
