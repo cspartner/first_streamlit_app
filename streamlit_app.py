@@ -39,9 +39,10 @@ try:
     streamlit.dataframe(back_from_function)
 except URLError as e:
   streamlit.error()
+  
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 
 def get_fruit_load_list():
-  my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_cur = my_cnx.cursor()
   my_cur.execute("SELECT * from fruit_load_list")
   return my_cur.fetchall()
@@ -52,12 +53,16 @@ if streamlit.button('Get Fruit Load List'):
   
 streamlit.stop()
 
+def insert_row_snowflake(new_fruit):
+   with my_cnx.cursor as my_cur:
+      my_cur.execute("insert into fruit_load_list values('from streamlit')")
+    return "Thanks for adding " + new_fruit
+
 # Extract the fruit names from the tuples and put them in a list
 fruit_list = [row[0] for row in my_data_rows]
 
 # Display the text input
 add_my_fruit = streamlit.text_input("What fruit would you like to add?")
-streamlit.write("Thanks for adding " + add_my_fruit)
-
-# Display a message thanking the user for adding the selected fruits
-my_cur.execute("insert into fruit_load_list values('from streamlit')")
+if streamlit.button('Add a fruit to the list')
+  resp = insert_row_snowflake(add_my_fruit)
+  streamlit.text(resp)
